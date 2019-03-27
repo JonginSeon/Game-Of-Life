@@ -17,12 +17,14 @@ const prompt = require('prompt-sync')();
 //File system for Node.js
 var fs = require('fs');
 
-
+/**
+ * main function starts the game of life 
+ */
 function main(){
 	//creates the game of life object
 	let myGrid = new grid();
 	//Temporary grid to save grid after file being read 
-	let temGrid =[];
+	let tempGrid =[];
 
 	if(process.argv.length != 3){
 		console.log("This program requires a file name and no other parameters to start.\n\n");
@@ -42,14 +44,14 @@ function main(){
 		{
 			break;
 		}
-			temGrid.push(buffer[0]);
+			tempGrid.push(buffer[0]);
 		}
 
-	let height = temGrid[0];
-	let width = temGrid[1];
+	let height = tempGrid[0];
+	let width = tempGrid[1];
 
 	console.log("Beginning with grid size " + height + " by "+ width+"\n");
-	myGrid.get_grid(temGrid);
+	myGrid.get_grid(tempGrid);
 	myGrid.print_grid();
 
     while(1){

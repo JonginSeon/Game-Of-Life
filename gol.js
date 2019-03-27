@@ -15,25 +15,25 @@ module.exports = class gol{
         }
     }
 
-	/*
-	 * get_grid creates new memory for a "grid".
-	 * @param data the grid read by file
+	/** 
+	 * get_grid gets a grid after file is read
+	 * @param temp the grid read by file
 	 */
-    get_grid(data){
-        this.row = data[0];
-        this.col = data[1];
+    get_grid(temp){
+        this.row = temp[0]; 
+        this.col = temp[1];
         let start = 2;
 
 		this.grid = new Array(this.row);
 		for (let i = 0; i < this.row; i++) {
             this.grid[i] = new Array(this.col);
             for (let j = 0; j < this.col; j++) {
-                this.grid[i][j] = data[start++]; 
+                this.grid[i][j] = temp[start++]; 
             }
         }
     }
     
-    /*
+    /** 
 	 * print_grid attempts to print rows and cols
 	 * grid stored at the location provided by grid
 	 */
@@ -59,17 +59,20 @@ module.exports = class gol{
 		}
 	console.log("========================\n");
     }
-    /*
-	 * mutate takes a grid and mutates that grid
-	 * according to Conway's rules. A new grid
-	 * is returned.
+    /** 
+	 * save function saves game
+	 * @param file is a name of file to save
+	 * @param contents is the array of saved grid 
 	 */
     save(file,contents){
         let fs = require('fs');
         fs.writeFileSync(file, contents);
     }
 	
-	
+	/**
+	 * mutates takes a grid and mutates that grid
+	 * accroding to to Conway's rules.
+	 */
     mutate(){
      //creates a new grid for update
      let new_grid = new Array(this.row);
@@ -119,8 +122,11 @@ module.exports = class gol{
 	this.grid = new_grid;
 	}
 	
-	/* get_neighbors is a helper method that returns
+	/** get_neighbors is a helper method that returns
 	 * the number of live neighbors a cell has.
+	 * @param i is a cell in row
+	 * @param j is a cell in col
+	 * @returns the number of live neighbors 
 	 */
 	get_neighbors(i,j ){
 		
